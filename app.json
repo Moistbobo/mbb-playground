@@ -2,6 +2,7 @@
   "expo": {
     "name": "mbb-playground",
     "slug": "mbb-playground",
+    "owner": "kpdev123",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -37,6 +38,18 @@
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "1e7fc2e3-e947-4e61-8cb3-4da83da4bbef"
+      }
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/1e7fc2e3-e947-4e61-8cb3-4da83da4bbef"
     }
   }
 }
