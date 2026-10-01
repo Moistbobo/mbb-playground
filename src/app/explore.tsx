@@ -1,5 +1,7 @@
 import { Image } from 'expo-image';
+import { useObserve } from 'expo-observe';
 import { SymbolView } from 'expo-symbols';
+import { useEffect } from 'react';
 import { Platform, Pressable, ScrollView, StyleSheet } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
@@ -12,12 +14,17 @@ import { BottomTabInset, MaxContentWidth, Spacing } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
 export default function TabTwoScreen() {
+  const { markInteractive } = useObserve();
   const safeAreaInsets = useSafeAreaInsets();
   const insets = {
     ...safeAreaInsets,
     bottom: safeAreaInsets.bottom + BottomTabInset + Spacing.three,
   };
   const theme = useTheme();
+
+  useEffect(() => {
+    markInteractive();
+  }, [markInteractive]);
 
   const contentPlatformStyle = Platform.select({
     android: {
