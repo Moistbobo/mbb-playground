@@ -1,0 +1,56 @@
+import { Image } from 'expo-image';
+import { Pressable, StyleSheet } from 'react-native';
+
+import { ThemedText } from '@/components/themed-text';
+import { ThemedView } from '@/components/themed-view';
+import type { PortfolioItem } from '@/constants/portfolio';
+import { Spacing } from '@/constants/theme';
+
+export function PortfolioTile({
+  item,
+  onPress,
+}: {
+  item: PortfolioItem;
+  onPress: (name: string) => void;
+}) {
+  return (
+    <Pressable
+      accessibilityRole="button"
+      accessibilityLabel={item.name}
+      onPress={() => onPress(item.name)}
+      style={({ pressed }) => [styles.tile, pressed && styles.pressed]}>
+      <ThemedView type="backgroundElement" style={styles.thumbnail}>
+        <Image source={item.image} contentFit="contain" style={styles.image} />
+      </ThemedView>
+      <ThemedText type="smallBold" numberOfLines={2} style={styles.name}>
+        {item.name}
+      </ThemedText>
+    </Pressable>
+  );
+}
+
+const styles = StyleSheet.create({
+  tile: {
+    flex: 1,
+    alignItems: 'center',
+    gap: Spacing.two,
+  },
+  pressed: {
+    opacity: 0.7,
+  },
+  thumbnail: {
+    width: '100%',
+    aspectRatio: 1,
+    borderRadius: Spacing.three,
+    overflow: 'hidden',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  image: {
+    width: '62%',
+    height: '62%',
+  },
+  name: {
+    textAlign: 'center',
+  },
+});
