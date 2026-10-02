@@ -47,10 +47,12 @@ export function AsteroidGame() {
           {Array.from({ length: POOL_SIZE }, (_, index) => (
             <Asteroid key={index} world={world} slot={index} />
           ))}
-          <View pointerEvents="none" style={[styles.hud, { top: insets.top + Spacing.four }]}>
-            <Text style={styles.hint}>{t('game.hint')}</Text>
-            <Text style={styles.timer}>{t('game.timeLeft', { seconds: secondsLeft })}</Text>
-          </View>
+          {status === 'playing' ? (
+            <View pointerEvents="none" style={[styles.hud, { top: insets.top + Spacing.four }]}>
+              <Text style={styles.hint}>{t('game.hint')}</Text>
+              <Text style={styles.timer}>{t('game.timeLeft', { seconds: secondsLeft })}</Text>
+            </View>
+          ) : null}
         </View>
       </GestureDetector>
       {overlay ? (

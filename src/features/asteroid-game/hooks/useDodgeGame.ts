@@ -205,15 +205,14 @@ export function useDodgeGame(bottomInset: number): {
       const { width, height } = event.nativeEvent.layout;
       world.modify((value) => {
         'worklet';
-        if (value.width !== 0) {
-          return value;
+        if (value.width === 0) {
+          value.shipX = (width - SHIP_WIDTH) / 2;
+        } else if (width !== value.width) {
+          value.shipX = clamp(value.shipX, 0, width - SHIP_WIDTH);
         }
-        return {
-          ...value,
-          width,
-          height,
-          shipX: (width - SHIP_WIDTH) / 2,
-        };
+        value.width = width;
+        value.height = height;
+        return value;
       });
     },
     [world],
