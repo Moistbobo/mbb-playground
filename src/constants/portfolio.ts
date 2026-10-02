@@ -16,4 +16,5 @@ export const PORTFOLIO_ITEMS: readonly PortfolioItem[] = [
   { id: 'animated-charts', name: 'Animated Charts', image: require('@/assets/images/expo-badge.png') },
   { id: 'offline-notes', name: 'Offline Notes', image: require('@/assets/images/splash-icon.png') },
   { id: 'camera-filters', name: 'Camera Filters', image: require('@/assets/images/logo-glow.png') },
+  { id: 'dodge-asteroids', name: 'Dodge Asteroids', image: require('@/assets/images/expo-badge.png') },
 ];

@@ -11,13 +11,13 @@ export function PortfolioTile({
   onPress,
 }: {
   item: PortfolioItem;
-  onPress: (name: string) => void;
+  onPress: (item: PortfolioItem) => void;
 }) {
   return (
     <Pressable
       accessibilityRole="button"
       accessibilityLabel={item.name}
-      onPress={() => onPress(item.name)}
+      onPress={() => onPress(item)}
       style={({ pressed }) => [styles.tile, pressed && styles.pressed]}>
       <ThemedView type="backgroundElement" style={styles.thumbnail}>
         <Image source={item.image} contentFit="contain" style={styles.image} />

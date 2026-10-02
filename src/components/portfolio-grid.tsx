@@ -1,6 +1,7 @@
 import { StyleSheet, View } from 'react-native';
 
 import { PortfolioTile } from '@/components/portfolio-tile';
+import type { PortfolioItem } from '@/constants/portfolio';
 import { PORTFOLIO_ITEMS, TILE_COLUMNS } from '@/constants/portfolio';
 import { Spacing } from '@/constants/theme';
 
@@ -12,7 +13,7 @@ function chunk<T>(items: readonly T[], size: number): T[][] {
   return rows;
 }
 
-export function PortfolioGrid({ onPressItem }: { onPressItem: (name: string) => void }) {
+export function PortfolioGrid({ onPressItem }: { onPressItem: (item: PortfolioItem) => void }) {
   const rows = chunk(PORTFOLIO_ITEMS, TILE_COLUMNS);
 
   return (
