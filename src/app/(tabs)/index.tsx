@@ -22,7 +22,7 @@ export default function HomeScreen() {
 
   const handlePressItem = useCallback(
     (item: PortfolioItem) => {
-      if (item.id === 'dodge-asteroids') {
+      if (item.id === 'dodge-objects') {
         router.push('/game');
         return;
       }

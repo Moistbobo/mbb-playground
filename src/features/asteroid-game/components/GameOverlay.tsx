@@ -1,10 +1,21 @@
+import type { ReactNode } from 'react';
 import { Pressable, Text, View } from 'react-native';
 import { StyleSheet } from 'react-native-unistyles';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { Colors, Spacing } from '@/constants/theme';
 
-export function GameOverOverlay({ onRestart }: { onRestart: () => void }) {
+export function GameOverlay({
+  title,
+  actionLabel,
+  onAction,
+  children,
+}: {
+  title: string;
+  actionLabel: string;
+  onAction: () => void;
+  children: ReactNode;
+}) {
   const insets = useSafeAreaInsets();
 
   return (
@@ -14,14 +25,14 @@ export function GameOverOverlay({ onRestart }: { onRestart: () => void }) {
         { paddingTop: insets.top + Spacing.four, paddingBottom: insets.bottom + Spacing.four },
       ]}>
       <View style={styles.card}>
-        <Text style={styles.title}>Game Over</Text>
-        <Text style={styles.body}>You hit an asteroid.</Text>
+        <Text style={styles.title}>{title}</Text>
+        <View style={styles.body}>{children}</View>
         <Pressable
           accessibilityRole="button"
-          accessibilityLabel="Restart"
-          onPress={onRestart}
+          accessibilityLabel={actionLabel}
+          onPress={onAction}
           style={({ pressed }) => [styles.button, pressed && styles.pressed]}>
-          <Text style={styles.buttonLabel}>Restart</Text>
+          <Text style={styles.buttonLabel}>{actionLabel}</Text>
         </Pressable>
       </View>
     </View>
@@ -51,8 +62,8 @@ const styles = StyleSheet.create({
     color: Colors.dark.text,
   },
   body: {
-    fontSize: 16,
-    color: Colors.dark.textSecondary,
+    alignSelf: 'stretch',
+    gap: Spacing.two,
   },
   button: {
     paddingVertical: Spacing.two,

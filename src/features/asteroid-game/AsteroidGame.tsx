@@ -6,14 +6,42 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { Colors, Spacing } from '@/constants/theme';
 import { Asteroid } from './components/Asteroid';
-import { GameOverOverlay } from './components/GameOverOverlay';
+import { GameOverlay } from './components/GameOverlay';
 import { Ship } from './components/Ship';
 import { POOL_SIZE } from './constants';
-import { useDodgeGame } from './hooks/useDodgeGame';
+import { useDodgeGame, type GameStatus } from './hooks/useDodgeGame';
+
+type OverlayState = Exclude<GameStatus, 'playing'>;
+
+const OVERLAYS: Record<
+  OverlayState,
+  { title: string; actionLabel: string; body: string[] }
+> = {
+  idle: {
+    title: 'Dodge Objects',
+    actionLabel: 'Start',
+    body: [
+      'Drag anywhere to move your ship left and right.',
+      'Survive 15 seconds to win.',
+      'Touch an object and the run ends.',
+    ],
+  },
+  over: {
+    title: 'Game Over',
+    actionLabel: 'Restart',
+    body: ['You hit an object.'],
+  },
+  won: {
+    title: 'You Won',
+    actionLabel: 'Play Again',
+    body: ['You dodged objects for 15 seconds.'],
+  },
+};
 
 export function AsteroidGame() {
   const insets = useSafeAreaInsets();
-  const { world, status, panGesture, onLayout, onRestart } = useDodgeGame(insets.bottom);
+  const { world, status, panGesture, onLayout, onStart } = useDodgeGame(insets.bottom);
+  const overlay = status === 'playing' ? null : OVERLAYS[status];
 
   return (
     <View style={styles.screen}>
@@ -28,7 +56,15 @@ export function AsteroidGame() {
           </Text>
         </View>
       </GestureDetector>
-      {status === 'over' ? <GameOverOverlay onRestart={onRestart} /> : null}
+      {overlay ? (
+        <GameOverlay title={overlay.title} actionLabel={overlay.actionLabel} onAction={onStart}>
+          {overlay.body.map((line) => (
+            <Text key={line} style={styles.body}>
+              {line}
+            </Text>
+          ))}
+        </GameOverlay>
+      ) : null}
       <StatusBar style="light" />
     </View>
   );
@@ -49,6 +85,12 @@ const styles = StyleSheet.create({
     right: 0,
     textAlign: 'center',
     fontSize: 14,
+    color: Colors.dark.textSecondary,
+  },
+  body: {
+    fontSize: 15,
+    lineHeight: 20,
+    textAlign: 'center',
     color: Colors.dark.textSecondary,
   },
 });

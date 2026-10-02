@@ -11,5 +11,5 @@ export const AVATAR_URL = 'https://avatars.githubusercontent.com/u/29080587?v=4'
 export const TILE_COLUMNS = 3;
 
 export const PORTFOLIO_ITEMS: readonly PortfolioItem[] = [
-  { id: 'dodge-asteroids', name: 'Dodge Asteroids', image: require('@/assets/images/expo-badge.png') },
+  { id: 'dodge-objects', name: 'Dodge Objects', image: require('@/assets/images/expo-badge.png') },
 ];

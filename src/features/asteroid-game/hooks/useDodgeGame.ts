@@ -20,9 +20,10 @@ import {
   SHIP_HEIGHT,
   SHIP_WIDTH,
   SPAWN_INTERVAL_MS,
+  WIN_TIME_MS,
 } from '../constants';
 
-export type GameStatus = 'playing' | 'over';
+export type GameStatus = 'idle' | 'playing' | 'over' | 'won';
 
 export type AsteroidSlot = {
   active: boolean;
@@ -38,6 +39,7 @@ export type World = {
   bottomInset: number;
   shipX: number;
   spawnCooldownMs: number;
+  elapsedMs: number;
   asteroids: AsteroidSlot[];
 };
 
@@ -49,12 +51,13 @@ function clamp(value: number, min: number, max: number): number {
 function createWorld(): World {
   'worklet';
   return {
-    status: 'playing',
+    status: 'idle',
     width: 0,
     height: 0,
     bottomInset: 0,
     shipX: 0,
     spawnCooldownMs: SPAWN_INTERVAL_MS,
+    elapsedMs: 0,
     asteroids: Array.from({ length: POOL_SIZE }, () => ({
       active: false,
       x: 0,
@@ -78,6 +81,7 @@ function spawnAsteroid(w: World): void {
 
 function stepWorld(w: World, dtMs: number): void {
   'worklet';
+  w.elapsedMs += dtMs;
   w.spawnCooldownMs -= dtMs;
   if (w.spawnCooldownMs <= 0) {
     spawnAsteroid(w);
@@ -111,6 +115,10 @@ function stepWorld(w: World, dtMs: number): void {
       return;
     }
   }
+
+  if (w.elapsedMs >= WIN_TIME_MS) {
+    w.status = 'won';
+  }
 }
 
 function resetWorld(w: World): World {
@@ -121,6 +129,7 @@ function resetWorld(w: World): World {
   }
   w.shipX = (w.width - SHIP_WIDTH) / 2;
   w.spawnCooldownMs = SPAWN_INTERVAL_MS;
+  w.elapsedMs = 0;
   return w;
 }
 
@@ -129,10 +138,10 @@ export function useDodgeGame(bottomInset: number): {
   status: GameStatus;
   panGesture: ReturnType<typeof Gesture.Pan>;
   onLayout: (event: LayoutChangeEvent) => void;
-  onRestart: () => void;
+  onStart: () => void;
 } {
   const world = useSharedValue<World>(createWorld());
-  const [status, setStatus] = useState<GameStatus>('playing');
+  const [status, setStatus] = useState<GameStatus>('idle');
 
   useEffect(() => {
     world.modify((value) => {
@@ -162,7 +171,7 @@ export function useDodgeGame(bottomInset: number): {
         'worklet';
         world.modify((value) => {
           'worklet';
-          if (value.width > 0) {
+          if (value.width > 0 && value.status === 'playing') {
             value.shipX = clamp(value.shipX + event.changeX, 0, value.width - SHIP_WIDTH);
           }
           return value;
@@ -199,7 +208,7 @@ export function useDodgeGame(bottomInset: number): {
     [world],
   );
 
-  const onRestart = useCallback(() => {
+  const onStart = useCallback(() => {
     scheduleOnUI(() => {
       'worklet';
       if (world.value.status === 'playing') {
@@ -209,5 +218,5 @@ export function useDodgeGame(bottomInset: number): {
     });
   }, [world]);
 
-  return { world, status, panGesture, onLayout, onRestart };
+  return { world, status, panGesture, onLayout, onStart };
 }
