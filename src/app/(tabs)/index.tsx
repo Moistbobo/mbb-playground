@@ -30,7 +30,7 @@ export default function HomeScreen() {
       }
       Toast.show({
         type: 'success',
-        text1: t('home.pressed', { name: item.name }),
+        text1: t('home.pressed', { name: t(item.nameKey) }),
         position: 'bottom',
         bottomOffset: BottomTabInset + Spacing.four,
         visibilityTime: 2000,

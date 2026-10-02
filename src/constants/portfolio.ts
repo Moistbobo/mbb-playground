@@ -2,7 +2,7 @@ import type { ImageSourcePropType } from 'react-native';
 
 export type PortfolioItem = {
   id: string;
-  name: string;
+  nameKey: string;
   image: ImageSourcePropType;
 };
 
@@ -11,5 +11,5 @@ export const AVATAR_URL = 'https://avatars.githubusercontent.com/u/29080587?v=4'
 export const TILE_COLUMNS = 3;
 
 export const PORTFOLIO_ITEMS: readonly PortfolioItem[] = [
-  { id: 'dodge-objects', name: 'Dodge Objects', image: require('@/assets/images/expo-badge.png') },
+  { id: 'dodge-objects', nameKey: 'game.name', image: require('@/assets/images/expo-badge.png') },
 ];
