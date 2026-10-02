@@ -17,7 +17,7 @@ type OverlayState = Exclude<GameStatus, 'playing'>;
 export function AsteroidGame() {
   const insets = useSafeAreaInsets();
   const { t } = useTranslation();
-  const { world, status, panGesture, onLayout, onStart } = useDodgeGame(insets.bottom);
+  const { world, status, secondsLeft, panGesture, onLayout, onStart } = useDodgeGame(insets.bottom);
 
   const seconds = WIN_TIME_MS / 1000;
   const overlays: Record<OverlayState, { title: string; actionLabel: string; body: string[] }> = {
@@ -47,7 +47,10 @@ export function AsteroidGame() {
           {Array.from({ length: POOL_SIZE }, (_, index) => (
             <Asteroid key={index} world={world} slot={index} />
           ))}
-          <Text style={[styles.hint, { top: insets.top + Spacing.four }]}>{t('game.hint')}</Text>
+          <View pointerEvents="none" style={[styles.hud, { top: insets.top + Spacing.four }]}>
+            <Text style={styles.hint}>{t('game.hint')}</Text>
+            <Text style={styles.timer}>{t('game.timeLeft', { seconds: secondsLeft })}</Text>
+          </View>
         </View>
       </GestureDetector>
       {overlay ? (
@@ -73,13 +76,21 @@ const styles = StyleSheet.create({
     flex: 1,
     overflow: 'hidden',
   },
-  hint: {
+  hud: {
     position: 'absolute',
     left: 0,
     right: 0,
-    textAlign: 'center',
+    alignItems: 'center',
+    gap: Spacing.one,
+  },
+  hint: {
     fontSize: 14,
     color: Colors.dark.textSecondary,
+  },
+  timer: {
+    fontSize: 28,
+    fontWeight: '700',
+    color: Colors.dark.text,
   },
   body: {
     fontSize: 15,

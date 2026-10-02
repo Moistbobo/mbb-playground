@@ -139,9 +139,11 @@ export function useDodgeGame(bottomInset: number): {
   panGesture: ReturnType<typeof Gesture.Pan>;
   onLayout: (event: LayoutChangeEvent) => void;
   onStart: () => void;
+  secondsLeft: number;
 } {
   const world = useSharedValue<World>(createWorld());
   const [status, setStatus] = useState<GameStatus>('idle');
+  const [secondsLeft, setSecondsLeft] = useState(WIN_TIME_MS / 1000);
 
   useEffect(() => {
     world.modify((value) => {
@@ -189,6 +191,15 @@ export function useDodgeGame(bottomInset: number): {
     },
   );
 
+  useAnimatedReaction(
+    () => Math.ceil((WIN_TIME_MS - world.value.elapsedMs) / 1000),
+    (next, previous) => {
+      if (next !== previous) {
+        scheduleOnRN(setSecondsLeft, next);
+      }
+    },
+  );
+
   const onLayout = useCallback(
     (event: LayoutChangeEvent) => {
       const { width, height } = event.nativeEvent.layout;
@@ -218,5 +229,5 @@ export function useDodgeGame(bottomInset: number): {
     });
   }, [world]);
 
-  return { world, status, panGesture, onLayout, onStart };
+  return { world, status, panGesture, onLayout, onStart, secondsLeft };
 }

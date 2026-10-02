@@ -18,6 +18,7 @@
   "game": {
     "name": "Dodge Objects",
     "hint": "Drag horizontally to dodge",
+    "timeLeft": "{{seconds}}s left",
     "start": {
       "title": "Dodge Objects",
       "controls": "Drag anywhere to move your ship left and right.",
