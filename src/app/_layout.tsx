@@ -5,7 +5,9 @@ import { useColorScheme } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import Toast from 'react-native-toast-message';
 
+import '@/i18n';
 import { AnimatedSplashOverlay } from '@/components/animated-icon';
+import { useDeviceLocaleFallback } from '@/i18n/use-language';
 
 Observe.configure({
   integrations: { 'expo-router': true },
@@ -15,6 +17,7 @@ SplashScreen.preventAutoHideAsync();
 
 function RootLayout() {
   const colorScheme = useColorScheme();
+  useDeviceLocaleFallback();
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>

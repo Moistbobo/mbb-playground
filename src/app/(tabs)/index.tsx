@@ -1,6 +1,7 @@
 import { useObserve } from 'expo-observe';
 import { useRouter } from 'expo-router';
 import { useCallback, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Platform, ScrollView } from 'react-native';
 import { StyleSheet } from 'react-native-unistyles';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -15,6 +16,7 @@ import { BottomTabInset, MaxContentWidth, Spacing } from '@/constants/theme';
 export default function HomeScreen() {
   const { markInteractive } = useObserve();
   const router = useRouter();
+  const { t } = useTranslation();
 
   useEffect(() => {
     markInteractive();
@@ -28,13 +30,13 @@ export default function HomeScreen() {
       }
       Toast.show({
         type: 'success',
-        text1: `you have pressed ${item.name}`,
+        text1: t('home.pressed', { name: item.name }),
         position: 'bottom',
         bottomOffset: BottomTabInset + Spacing.four,
         visibilityTime: 2000,
       });
     },
-    [router],
+    [router, t],
   );
 
   return (
