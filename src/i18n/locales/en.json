@@ -1,0 +1,18 @@
+{
+  "tabs": {
+    "home": "Home",
+    "settings": "Settings",
+    "docs": "Docs"
+  },
+  "settings": {
+    "title": "Settings",
+    "language": "Language"
+  },
+  "home": {
+    "pressed": "you have pressed {{name}}"
+  },
+  "hint": {
+    "tryEditing": "Try editing",
+    "editPath": "app/index.tsx"
+  }
+}
