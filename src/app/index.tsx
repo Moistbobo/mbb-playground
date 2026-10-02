@@ -1,4 +1,6 @@
 import * as Device from 'expo-device';
+import { useObserve } from 'expo-observe';
+import { useEffect } from 'react';
 import { Platform, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -29,6 +31,12 @@ function getDevMenuHint() {
 }
 
 export default function HomeScreen() {
+  const { markInteractive } = useObserve();
+
+  useEffect(() => {
+    markInteractive();
+  }, [markInteractive]);
+
   return (
     <ThemedView style={styles.container}>
       <SafeAreaView style={styles.safeArea}>
