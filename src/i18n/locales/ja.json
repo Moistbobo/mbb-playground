@@ -1,0 +1,18 @@
+{
+  "tabs": {
+    "home": "ホーム",
+    "settings": "設定",
+    "docs": "ドキュメント"
+  },
+  "settings": {
+    "title": "設定",
+    "language": "言語"
+  },
+  "home": {
+    "pressed": "{{name}} を押しました"
+  },
+  "hint": {
+    "tryEditing": "編集してみましょう",
+    "editPath": "app/index.tsx"
+  }
+}

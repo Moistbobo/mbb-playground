@@ -1,5 +1,6 @@
 import { useObserve } from 'expo-observe';
 import { useCallback, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Platform, ScrollView, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Toast from 'react-native-toast-message';
@@ -11,20 +12,24 @@ import { BottomTabInset, MaxContentWidth, Spacing } from '@/constants/theme';
 
 export default function HomeScreen() {
   const { markInteractive } = useObserve();
+  const { t } = useTranslation();
 
   useEffect(() => {
     markInteractive();
   }, [markInteractive]);
 
-  const handlePressItem = useCallback((name: string) => {
-    Toast.show({
-      type: 'success',
-      text1: `you have pressed ${name}`,
-      position: 'bottom',
-      bottomOffset: BottomTabInset + Spacing.four,
-      visibilityTime: 2000,
-    });
-  }, []);
+  const handlePressItem = useCallback(
+    (name: string) => {
+      Toast.show({
+        type: 'success',
+        text1: t('home.pressed', { name }),
+        position: 'bottom',
+        bottomOffset: BottomTabInset + Spacing.four,
+        visibilityTime: 2000,
+      });
+    },
+    [t]
+  );
 
   return (
     <ThemedView style={styles.container}>
