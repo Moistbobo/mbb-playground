@@ -1,10 +1,17 @@
 import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { Colors, Spacing } from '@/constants/theme';
 
 export function GameOverOverlay({ onRestart }: { onRestart: () => void }) {
+  const insets = useSafeAreaInsets();
+
   return (
-    <View style={styles.overlay}>
+    <View
+      style={[
+        styles.overlay,
+        { paddingTop: insets.top + Spacing.four, paddingBottom: insets.bottom + Spacing.four },
+      ]}>
       <View style={styles.card}>
         <Text style={styles.title}>Game Over</Text>
         <Text style={styles.body}>You hit an asteroid.</Text>

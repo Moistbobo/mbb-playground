@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import type { LayoutChangeEvent } from 'react-native';
 import { Gesture } from 'react-native-gesture-handler';
 import {
@@ -35,6 +35,7 @@ export type World = {
   status: GameStatus;
   width: number;
   height: number;
+  bottomInset: number;
   shipX: number;
   spawnCooldownMs: number;
   asteroids: AsteroidSlot[];
@@ -51,6 +52,7 @@ function createWorld(): World {
     status: 'playing',
     width: 0,
     height: 0,
+    bottomInset: 0,
     shipX: 0,
     spawnCooldownMs: SPAWN_INTERVAL_MS,
     asteroids: Array.from({ length: POOL_SIZE }, () => ({
@@ -84,7 +86,7 @@ function stepWorld(w: World, dtMs: number): void {
 
   const ship = {
     x: w.shipX,
-    y: w.height - SHIP_BOTTOM_OFFSET - SHIP_HEIGHT,
+    y: w.height - SHIP_BOTTOM_OFFSET - SHIP_HEIGHT - w.bottomInset,
     width: SHIP_WIDTH,
     height: SHIP_HEIGHT,
   };
@@ -122,7 +124,7 @@ function resetWorld(w: World): World {
   return w;
 }
 
-export function useDodgeGame(): {
+export function useDodgeGame(bottomInset: number): {
   world: SharedValue<World>;
   status: GameStatus;
   panGesture: ReturnType<typeof Gesture.Pan>;
@@ -131,6 +133,14 @@ export function useDodgeGame(): {
 } {
   const world = useSharedValue<World>(createWorld());
   const [status, setStatus] = useState<GameStatus>('playing');
+
+  useEffect(() => {
+    world.modify((value) => {
+      'worklet';
+      value.bottomInset = bottomInset;
+      return value;
+    });
+  }, [world, bottomInset]);
 
   useFrameCallback((frameInfo) => {
     'worklet';

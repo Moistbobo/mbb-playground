@@ -8,7 +8,10 @@ export function Ship({ world }: { world: SharedValue<World> }) {
   const style = useAnimatedStyle(() => ({
     transform: [
       { translateX: world.value.shipX },
-      { translateY: world.value.height - SHIP_BOTTOM_OFFSET - SHIP_HEIGHT },
+      {
+        translateY:
+          world.value.height - SHIP_BOTTOM_OFFSET - SHIP_HEIGHT - world.value.bottomInset,
+      },
     ],
   }));
 
