@@ -1,0 +1,12 @@
+export const SHIP_WIDTH = 26;
+export const SHIP_HEIGHT = 52;
+export const ASTEROID_SIZE = 34;
+export const ASTEROID_SPEED = 150;
+export const ASTEROID_SPEED_JITTER = 45;
+export const SPAWN_INTERVAL_MS = 850;
+export const WIN_TIME_MS = 15000;
+export const POOL_SIZE = 12;
+export const MAX_FRAME_DT_MS = 32;
+export const SHIP_BOTTOM_OFFSET = 24;
+export const SHIP_COLOR = '#22C55E';
+export const ASTEROID_COLOR = '#EF4444';

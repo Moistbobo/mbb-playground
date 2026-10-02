@@ -1,5 +1,7 @@
 import { Image } from 'expo-image';
-import { Pressable, StyleSheet } from 'react-native';
+import { useTranslation } from 'react-i18next';
+import { Pressable } from 'react-native';
+import { StyleSheet } from 'react-native-unistyles';
 
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
@@ -11,19 +13,22 @@ export function PortfolioTile({
   onPress,
 }: {
   item: PortfolioItem;
-  onPress: (name: string) => void;
+  onPress: (item: PortfolioItem) => void;
 }) {
+  const { t } = useTranslation();
+  const name = t(item.nameKey);
+
   return (
     <Pressable
       accessibilityRole="button"
-      accessibilityLabel={item.name}
-      onPress={() => onPress(item.name)}
+      accessibilityLabel={name}
+      onPress={() => onPress(item)}
       style={({ pressed }) => [styles.tile, pressed && styles.pressed]}>
       <ThemedView type="backgroundElement" style={styles.thumbnail}>
         <Image source={item.image} contentFit="contain" style={styles.image} />
       </ThemedView>
       <ThemedText type="smallBold" numberOfLines={2} style={styles.name}>
-        {item.name}
+        {name}
       </ThemedText>
     </Pressable>
   );

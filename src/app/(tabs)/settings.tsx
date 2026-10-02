@@ -2,7 +2,8 @@ import { Picker } from '@expo/ui/community/picker';
 import { useObserve } from 'expo-observe';
 import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Platform, StyleSheet } from 'react-native';
+import { Platform } from 'react-native';
+import { StyleSheet } from 'react-native-unistyles';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { ThemedText } from '@/components/themed-text';

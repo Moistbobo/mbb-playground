@@ -14,5 +14,27 @@
   "hint": {
     "tryEditing": "Try editing",
     "editPath": "app/index.tsx"
+  },
+  "game": {
+    "name": "Dodge Objects",
+    "hint": "Drag horizontally to dodge",
+    "timeLeft": "{{seconds}}s left",
+    "start": {
+      "title": "Dodge Objects",
+      "controls": "Drag anywhere to move your ship left and right.",
+      "win": "Survive {{seconds}} seconds to win.",
+      "lose": "Touch an object and the run ends.",
+      "action": "Start"
+    },
+    "over": {
+      "title": "Game Over",
+      "body": "You hit an object.",
+      "action": "Restart"
+    },
+    "won": {
+      "title": "You Won",
+      "body": "You dodged objects for {{seconds}} seconds.",
+      "action": "Play Again"
+    }
   }
 }
