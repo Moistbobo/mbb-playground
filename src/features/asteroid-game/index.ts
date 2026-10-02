@@ -1,0 +1,1 @@
+export { AsteroidGame } from './AsteroidGame';
