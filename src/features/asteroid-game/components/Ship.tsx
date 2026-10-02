@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native-unistyles';
 import Animated, { useAnimatedStyle, type SharedValue } from 'react-native-reanimated';
 
 import { SHIP_BOTTOM_OFFSET, SHIP_COLOR, SHIP_HEIGHT, SHIP_WIDTH } from '../constants';

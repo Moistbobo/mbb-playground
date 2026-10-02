@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native-unistyles';
 import Animated, { useAnimatedStyle, type SharedValue } from 'react-native-reanimated';
 
 import { ASTEROID_COLOR, ASTEROID_SIZE } from '../constants';

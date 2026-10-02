@@ -1,7 +1,8 @@
 import { useObserve } from 'expo-observe';
 import { useRouter } from 'expo-router';
 import { useCallback, useEffect } from 'react';
-import { Platform, ScrollView, StyleSheet } from 'react-native';
+import { Platform, ScrollView } from 'react-native';
+import { StyleSheet } from 'react-native-unistyles';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Toast from 'react-native-toast-message';
 
