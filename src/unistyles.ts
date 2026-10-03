@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native-unistyles';
 
-import { Colors, Fonts, Spacing } from '@/constants/theme';
+import { Colors, Fonts, Radius, Spacing, Typography } from '@/constants/theme';
 
 const breakpoints = {
   xs: 0,
@@ -10,16 +10,30 @@ const breakpoints = {
   xl: 1200,
 } as const;
 
+const spacing = {
+  ...Spacing,
+  xs: 4,
+  sm: 8,
+  md: 12,
+  lg: 16,
+  xl: 24,
+  xxl: 32,
+} as const;
+
 const lightTheme = {
   colors: Colors.light,
   fonts: Fonts,
-  spacing: Spacing,
+  spacing,
+  radius: Radius,
+  typography: Typography,
 } as const;
 
 const darkTheme = {
   colors: Colors.dark,
   fonts: Fonts,
-  spacing: Spacing,
+  spacing,
+  radius: Radius,
+  typography: Typography,
 } as const;
 
 declare module 'react-native-unistyles' {

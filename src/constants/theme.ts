@@ -10,17 +10,47 @@ import { Platform } from 'react-native';
 export const Colors = {
   light: {
     text: '#000000',
+    textSecondary: '#60646C',
+    textMuted: '#585F6B',
+    textSubtle: '#626976',
     background: '#ffffff',
+    surface: '#FFFFFF',
+    surfaceElevated: '#FFFFFF',
+    surfaceMuted: '#ECEEF3',
     backgroundElement: '#F0F0F3',
     backgroundSelected: '#E0E1E6',
-    textSecondary: '#60646C',
+    border: '#E1E4EA',
+    borderStrong: '#C7CCD6',
+    primary: '#3B5BDB',
+    onPrimary: '#FFFFFF',
+    primaryMuted: '#E6EAFB',
+    accent: '#0F766E',
+    success: '#0F7B4F',
+    warning: '#B45309',
+    danger: '#C0392B',
+    focusRing: '#3B5BDB',
   },
   dark: {
     text: '#ffffff',
+    textSecondary: '#B0B4BA',
+    textMuted: '#A3AAB6',
+    textSubtle: '#8A929F',
     background: '#000000',
+    surface: '#131519',
+    surfaceElevated: '#1A1D23',
+    surfaceMuted: '#1F232A',
     backgroundElement: '#212225',
     backgroundSelected: '#2E3135',
-    textSecondary: '#B0B4BA',
+    border: '#252A33',
+    borderStrong: '#3A414D',
+    primary: '#93A8FF',
+    onPrimary: '#0A1024',
+    primaryMuted: '#1B2440',
+    accent: '#3BD9AE',
+    success: '#4ADE80',
+    warning: '#FBBF24',
+    danger: '#F87171',
+    focusRing: '#93A8FF',
   },
 } as const;
 
@@ -63,3 +93,21 @@ export const Spacing = {
 
 export const BottomTabInset = Platform.select({ ios: 50, android: 80 }) ?? 0;
 export const MaxContentWidth = 800;
+
+export const Radius = {
+  sm: 8,
+  md: 12,
+  lg: 18,
+  xl: 28,
+  pill: 999,
+} as const;
+
+export const Typography = {
+  display: { fontSize: 40, lineHeight: 46, fontWeight: '700' },
+  title: { fontSize: 26, lineHeight: 32, fontWeight: '700' },
+  heading: { fontSize: 17, lineHeight: 24, fontWeight: '600' },
+  body: { fontSize: 15, lineHeight: 22, fontWeight: '400' },
+  label: { fontSize: 13, lineHeight: 18, fontWeight: '600' },
+  caption: { fontSize: 12, lineHeight: 16, fontWeight: '500' },
+  mono: { fontSize: 12, lineHeight: 16, fontWeight: '500' },
+} as const;

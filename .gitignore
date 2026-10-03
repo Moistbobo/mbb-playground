@@ -31,7 +31,12 @@ yarn-error.*
 *.pem
 
 # local env files
+.env
 .env*.local
+
+# tooling
+.opencode/
+.playwright-mcp/
 
 # typescript
 *.tsbuildinfo

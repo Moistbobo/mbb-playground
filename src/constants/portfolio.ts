@@ -4,6 +4,7 @@ export type PortfolioItem = {
   id: string;
   nameKey: string;
   image: ImageSourcePropType;
+  platforms?: readonly ('ios' | 'android' | 'web')[];
 };
 
 export const APP_TITLE = 'mbb-playground';
@@ -12,4 +13,10 @@ export const TILE_COLUMNS = 3;
 
 export const PORTFOLIO_ITEMS: readonly PortfolioItem[] = [
   { id: 'dodge-objects', nameKey: 'game.name', image: require('@/assets/images/expo-badge.png') },
+  {
+    id: 'worlds',
+    nameKey: 'worlds.name',
+    image: require('@/assets/images/logo-glow.png'),
+    platforms: ['ios', 'android'],
+  },
 ];

@@ -36,6 +36,12 @@ Docs: https://docs.expo.dev/eas/index.md
 
 Build profiles (`eas.json`) each map to an EAS Update channel: `development`, `preview`, `production`. Publish OTA updates with `pnpm update:preview` / `pnpm update:prod` (i.e. `eas update --channel <channel>`).
 
+## Worlds feature
+
+`/worlds` is a foldable/adaptive VRChat world explorer. It calls an external API that authenticates with a bearer token and an exact `Origin` header, so it targets iOS and Android only and its tile is hidden on web. Provide `EXPO_PUBLIC_API_TOKEN` (and optionally `EXPO_PUBLIC_API_BASE_URL`, `EXPO_PUBLIC_WORLD_REQUEST_ORIGIN`); see `.env.example`.
+
+The adaptive layout uses `@logicwind/react-native-fold-detection`, a native TurboModule. It resolves from the package's TypeScript source (no built `lib/`), wired through the Metro source condition and a `resolveRequest` alias, so it needs a development build and is skipped on web via `.web` stubs.
+
 ## Rules
 
 - If `ios/` and `android/` directories do not exist, they are generated (Continuous Native Generation). Never create or edit them by hand — configure native behavior in `app.json` and config plugins.
