@@ -1,4 +1,4 @@
-import { View } from 'react-native';
+import { Platform, View } from 'react-native';
 import { StyleSheet } from 'react-native-unistyles';
 
 import { PortfolioTile } from '@/components/portfolio-tile';
@@ -14,8 +14,13 @@ function chunk<T>(items: readonly T[], size: number): T[][] {
   return rows;
 }
 
+function runsOnThisPlatform(item: PortfolioItem): boolean {
+  return !item.platforms || item.platforms.includes(Platform.OS as 'ios' | 'android' | 'web');
+}
+
 export function PortfolioGrid({ onPressItem }: { onPressItem: (item: PortfolioItem) => void }) {
-  const rows = chunk(PORTFOLIO_ITEMS, TILE_COLUMNS);
+  const items = PORTFOLIO_ITEMS.filter(runsOnThisPlatform);
+  const rows = chunk(items, TILE_COLUMNS);
 
   return (
     <View style={styles.grid}>

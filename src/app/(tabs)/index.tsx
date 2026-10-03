@@ -28,6 +28,10 @@ export default function HomeScreen() {
         router.push('/game');
         return;
       }
+      if (item.id === 'worlds') {
+        router.push('/worlds');
+        return;
+      }
       Toast.show({
         type: 'success',
         text1: t('home.pressed', { name: t(item.nameKey) }),

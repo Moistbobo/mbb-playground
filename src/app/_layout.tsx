@@ -6,7 +6,9 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import Toast from 'react-native-toast-message';
 
 import '@/i18n';
+import '@/unistyles';
 import { AnimatedSplashOverlay } from '@/components/animated-icon';
+import { FoldProvider } from '@/components/fold-provider';
 import { useDeviceLocaleFallback } from '@/i18n/use-language';
 
 Observe.configure({
@@ -22,10 +24,13 @@ function RootLayout() {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-        <Stack screenOptions={{ headerShown: false }}>
-          <Stack.Screen name="(tabs)" />
-          <Stack.Screen name="game" options={{ animation: 'fade' }} />
-        </Stack>
+        <FoldProvider>
+          <Stack screenOptions={{ headerShown: false }}>
+            <Stack.Screen name="(tabs)" />
+            <Stack.Screen name="game" options={{ animation: 'fade' }} />
+            <Stack.Screen name="worlds" />
+          </Stack>
+        </FoldProvider>
         <AnimatedSplashOverlay />
         <Toast />
       </ThemeProvider>
