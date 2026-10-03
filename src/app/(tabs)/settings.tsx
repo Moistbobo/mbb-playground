@@ -33,6 +33,7 @@ export default function SettingsScreen() {
             {t('settings.language')}
           </ThemedText>
           <Picker
+            key={Platform.OS === 'android' ? language : undefined}
             selectedValue={language}
             onValueChange={(value) => setLanguage(value)}
             style={styles.picker}>
