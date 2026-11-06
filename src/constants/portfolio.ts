@@ -19,4 +19,9 @@ export const PORTFOLIO_ITEMS: readonly PortfolioItem[] = [
     image: require('@/assets/images/logo-glow.png'),
     platforms: ['ios', 'android'],
   },
+  {
+    id: 'boneyard',
+    nameKey: 'boneyard.name',
+    image: require('@/assets/images/logo-glow.png'),
+  },
 ];

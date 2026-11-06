@@ -12,7 +12,13 @@ module.exports = defineConfig([
       'import/resolver': {
         typescript: {
           project: './tsconfig.json',
-          conditionNames: ['react-native', 'react-native-fold-detection-source'],
+          conditionNames: [
+            'react-native',
+            'react-native-fold-detection-source',
+            'types',
+            'import',
+            'default',
+          ],
         },
       },
     },

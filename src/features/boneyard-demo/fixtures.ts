@@ -1,0 +1,42 @@
+import type { World } from '@/features/worlds/types';
+
+export const SAMPLE_WORLDS: World[] = [
+  {
+    worldId: 'wrld_7e2c1f8a-3d4b-4c59-9a12-6f0b8e5d2a31',
+    name: 'Midnight Garden',
+    authorName: 'Lumen Atelier',
+    capacity: 32,
+    platforms: ['standalonewindows', 'android', 'ios'],
+    tags: ['chill', 'flora', 'night', 'photogenic', 'quest-friendly'],
+    imageUrl: '',
+    vrchatUrl: 'https://vrchat.com/home/world/wrld_7e2c1f8a-3d4b-4c59-9a12-6f0b8e5d2a31',
+    quality: 'good',
+    highPriority: true,
+    createdAt: '2025-04-18T09:24:00.000Z',
+  },
+  {
+    worldId: 'wrld_1b9a4d6e-8c27-4f05-b3de-2a7c9f1e6b48',
+    name: 'Neon Drift Circuit',
+    authorName: 'Kaito_Zero',
+    capacity: 16,
+    platforms: ['standalonewindows'],
+    tags: ['racing', 'neon', 'pvp', 'vehicles', 'pc-only', 'late-night'],
+    imageUrl: '',
+    vrchatUrl: 'https://vrchat.com/home/world/wrld_1b9a4d6e-8c27-4f05-b3de-2a7c9f1e6b48',
+    quality: 'bad',
+    createdAt: '2024-11-02T22:48:00.000Z',
+  },
+  {
+    worldId: 'wrld_5c3f0e7d-2a61-4b98-8e4c-9d1f6a2b7c03',
+    name: 'Library of Small Hours',
+    authorName: 'sable.works',
+    capacity: 64,
+    platforms: ['standalonewindows', 'android'],
+    tags: ['cozy', 'reading', 'rain', 'ambient', 'community'],
+    imageUrl: '',
+    vrchatUrl: 'https://vrchat.com/home/world/wrld_5c3f0e7d-2a61-4b98-8e4c-9d1f6a2b7c03',
+    quality: null,
+    highPriority: false,
+    createdAt: '2026-01-27T04:12:00.000Z',
+  },
+];

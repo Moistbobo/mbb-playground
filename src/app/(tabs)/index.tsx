@@ -32,6 +32,10 @@ export default function HomeScreen() {
         router.push('/worlds');
         return;
       }
+      if (item.id === 'boneyard') {
+        router.push('/boneyard');
+        return;
+      }
       Toast.show({
         type: 'success',
         text1: t('home.pressed', { name: t(item.nameKey) }),

@@ -8,6 +8,7 @@
     "@logicwind/react-native-fold-detection": "github:Moistbobo/react-native-fold-detection#main",
     "@shopify/flash-list": "^2.0.2",
     "@tanstack/react-query": "^5.104.1",
+    "boneyard-js": "^1.10.0",
     "expo": "~57.0.26",
     "expo-constants": "~57.0.20",
     "expo-dev-client": "~57.0.19",
