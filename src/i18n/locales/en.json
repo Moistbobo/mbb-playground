@@ -139,6 +139,12 @@
     "tryEditing": "Try editing",
     "editPath": "app/index.tsx"
   },
+  "boneyard": {
+    "name": "Boneyard",
+    "title": "Boneyard Skeletons",
+    "subtitle": "World cards wrapped in layout-matched skeleton placeholders.",
+    "replay": "Replay"
+  },
   "game": {
     "name": "Dodge Objects",
     "hint": "Drag horizontally to dodge",

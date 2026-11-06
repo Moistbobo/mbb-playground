@@ -1,0 +1,7 @@
+{
+  "breakpoints": [360, 768],
+  "out": "./src/features/boneyard-demo/bones",
+  "select": "container",
+  "wait": 1200,
+  "routes": ["/boneyard"]
+}

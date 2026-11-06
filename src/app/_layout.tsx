@@ -29,6 +29,7 @@ function RootLayout() {
             <Stack.Screen name="(tabs)" />
             <Stack.Screen name="game" options={{ animation: 'fade' }} />
             <Stack.Screen name="worlds" />
+            <Stack.Screen name="boneyard" />
           </Stack>
         </FoldProvider>
         <AnimatedSplashOverlay />
