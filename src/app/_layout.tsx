@@ -28,6 +28,7 @@ function RootLayout() {
           <Stack screenOptions={{ headerShown: false }}>
             <Stack.Screen name="(tabs)" />
             <Stack.Screen name="game" options={{ animation: 'fade' }} />
+            <Stack.Screen name="cards" options={{ animation: 'fade' }} />
             <Stack.Screen name="worlds" />
           </Stack>
         </FoldProvider>

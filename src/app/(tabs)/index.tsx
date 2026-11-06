@@ -28,6 +28,10 @@ export default function HomeScreen() {
         router.push('/game');
         return;
       }
+      if (item.id === 'cards') {
+        router.push('/cards');
+        return;
+      }
       if (item.id === 'worlds') {
         router.push('/worlds');
         return;

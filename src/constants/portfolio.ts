@@ -14,6 +14,12 @@ export const TILE_COLUMNS = 3;
 export const PORTFOLIO_ITEMS: readonly PortfolioItem[] = [
   { id: 'dodge-objects', nameKey: 'game.name', image: require('@/assets/images/expo-badge.png') },
   {
+    id: 'cards',
+    nameKey: 'cards.name',
+    image: require('@/assets/cards/card.jpg'),
+    platforms: ['ios', 'android'],
+  },
+  {
     id: 'worlds',
     nameKey: 'worlds.name',
     image: require('@/assets/images/logo-glow.png'),

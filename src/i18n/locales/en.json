@@ -160,5 +160,32 @@
       "body": "You dodged objects for {{seconds}} seconds.",
       "action": "Play Again"
     }
+  },
+  "cards": {
+    "name": "Holo Card",
+    "title": "Holographic Card",
+    "hint": "Drag to tilt. Tap the card or press Recenter to reset.",
+    "recenter": "Recenter",
+    "sensorUnavailable": "Motion sensor unavailable — drag to tilt.",
+    "patterns": {
+      "label": "Foil pattern",
+      "beams": "Beams",
+      "cosmos": "Cosmos",
+      "mosaic": "Mosaic"
+    },
+    "strength": {
+      "rainbow": "Rainbow",
+      "glare": "Glare",
+      "glitter": "Glitter"
+    },
+    "dev": {
+      "nextTilt": "Dev: next tilt"
+    },
+    "a11y": {
+      "card": "Holographic trading card",
+      "cardHint": "Drag to tilt the foil. Activate to recenter.",
+      "recenterHint": "Resets the card to flat for how you are holding it.",
+      "pattern": "Use the {{pattern}} foil pattern"
+    }
   }
 }

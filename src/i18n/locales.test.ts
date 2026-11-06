@@ -31,6 +31,12 @@ describe('locales', () => {
     }
   });
 
+  it('defines every English key in Japanese', () => {
+    for (const key of Object.keys(enFlat)) {
+      expect(Object.keys(jaFlat)).toContain(key);
+    }
+  });
+
   it('keeps interpolation placeholders consistent across shared keys', () => {
     for (const [key, value] of Object.entries(jaFlat)) {
       if (enFlat[key] === undefined) continue;
