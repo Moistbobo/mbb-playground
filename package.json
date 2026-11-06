@@ -7,6 +7,7 @@
     "@expo/ui": "~57.0.21",
     "@logicwind/react-native-fold-detection": "github:Moistbobo/react-native-fold-detection#main",
     "@shopify/flash-list": "^2.0.2",
+    "@shopify/react-native-skia": "2.6.2",
     "@tanstack/react-query": "^5.104.1",
     "expo": "~57.0.26",
     "expo-constants": "~57.0.20",
@@ -72,7 +73,8 @@
   "pnpm": {
     "onlyBuiltDependencies": [
       "unrs-resolver",
-      "@logicwind/react-native-fold-detection"
+      "@logicwind/react-native-fold-detection",
+      "@shopify/react-native-skia"
     ]
   },
   "expo": {
