@@ -3,7 +3,7 @@ import { useDerivedValue, useFrameCallback, useSharedValue, type SharedValue } f
 import type { Uniforms } from '@shopify/react-native-skia';
 
 import { MAX_FRAME_DT_MS } from '../constants';
-import { tiltToLight, type Vec2 } from '../tilt';
+import { clamp, tiltToLight, type Vec2 } from '../tilt';
 
 export type FoilUniformsInput = {
   width: number;
@@ -35,11 +35,16 @@ function buildUniforms(
 ): Uniforms {
   'worklet';
   const light = tiltToLight(tilt);
+  // A slow lamp drift keeps the card alive at rest without touching the flake
+  // field: the sparkles glide with the light instead of blinking on their own.
+  const drift = 0.035;
   return {
     uSize: [width, height],
     uTilt: [tilt.x, tilt.y],
-    uLight: [light.x, light.y],
-    uTime: time,
+    uLight: [
+      clamp(light.x + Math.sin(time * 0.7) * drift, 0, 1),
+      clamp(light.y + Math.cos(time * 0.53) * drift, 0, 1),
+    ],
     uRainbow: rainbow,
     uGlare: glare,
     uGlitter: glitter,

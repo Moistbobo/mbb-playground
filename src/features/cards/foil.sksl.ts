@@ -10,7 +10,6 @@ export const FOIL_SKSL = `
 uniform float2 uSize;
 uniform float2 uTilt;
 uniform float2 uLight;
-uniform float uTime;
 uniform float uRainbow;
 uniform float uGlare;
 uniform float uGlitter;
@@ -93,11 +92,17 @@ half4 main(float2 fragCoord) {
     float d = abs(band - uLight.x);
     float streak = 1.0 - smoothstep(0.0, 0.28, d);
     float halo = 1.0 - smoothstep(0.0, 1.10, d);
-    float cell = hash21(floor(uv * 48.0) + uLight * 6.0 + float2(uTime * 0.05, uTime * 0.05));
-    float glint = smoothstep(0.985, 1.0, cell);
-    col = float3(streak * uGlare, streak * uGlare, streak * uGlare)
+    // Glitter is a flake field, not static. Every cell owns one facet with a
+    // fixed random normal, hashed once in card space; a facet only flashes
+    // while the light sweeps across it, so the field answers to the light
+    // angle and never re-rolls on a timer.
+    float2 cells = floor(uv * 120.0);
+    float2 facet = float2(hash21(cells), hash21(cells + 37.7));
+    float glint = 1.0 - smoothstep(0.030, 0.070, distance(facet, uLight));
+    glint *= 0.6;
+    col = float3(0.0) + float3(streak * uGlare, streak * uGlare, streak * uGlare)
         + float3(halo * 0.12 * uGlare, halo * 0.12 * uGlare, halo * 0.12 * uGlare)
-        + float3(glint * streak * uGlitter, glint * streak * uGlitter, glint * streak * uGlitter);
+        + float3(glint * uGlitter, glint * uGlitter, glint * uGlitter);
   }
 
   return half4(half3(col * a), half(a));

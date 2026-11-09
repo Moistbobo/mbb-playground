@@ -29,4 +29,4 @@ export type CardPattern = 0 | 1 | 2;
 export const DEFAULT_PATTERN: CardPattern = 0;
 export const DEFAULT_RAINBOW = 0.85;
 export const DEFAULT_GLARE = 0.75;
-export const DEFAULT_GLITTER = 0.5;
+export const DEFAULT_GLITTER = 0.3;
