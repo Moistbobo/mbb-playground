@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { Gesture, type ComposedGesture } from 'react-native-gesture-handler';
 import {
   cancelAnimation,
@@ -60,7 +60,30 @@ export function useCardTilt({ dragRange, reduceMotion }: CardTiltOptions): CardT
   const firstSample = useSharedValue<Vec2 | null>(null);
 
   const [sensorAvailable, setSensorAvailable] = useState(false);
-  const markSensorAvailable = useCallback(() => setSensorAvailable(true), []);
+  // The sensor's first callback can land on the UI thread before this component
+  // has committed, and setting state then warns (and trips the dev toast).
+  // Hold the flag until mount has happened.
+  const mounted = useRef(false);
+  const pendingAvailable = useRef(false);
+
+  useEffect(() => {
+    mounted.current = true;
+    if (pendingAvailable.current) {
+      pendingAvailable.current = false;
+      setSensorAvailable(true);
+    }
+    return () => {
+      mounted.current = false;
+    };
+  }, []);
+
+  const markSensorAvailable = useCallback(() => {
+    if (!mounted.current) {
+      pendingAvailable.current = true;
+      return;
+    }
+    setSensorAvailable(true);
+  }, []);
 
   const ingestSample = useCallback(
     (sample: Vec2) => {
