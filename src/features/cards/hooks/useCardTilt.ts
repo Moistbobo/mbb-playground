@@ -128,6 +128,12 @@ export function useCardTilt({ dragRange, reduceMotion }: CardTiltOptions): CardT
   );
 
   const pan = Gesture.Pan()
+    // The card lives inside a ScrollView. Claiming any drag would make the
+    // screen unscrollable, since the card covers most of it, so the pan only
+    // activates on horizontal movement; vertical drags fall through to the
+    // scroll view. Once active it tracks both axes, and the attitude sensor
+    // covers vertical tilt on devices that have one.
+    .activeOffsetX([-10, 10])
     .onBegin(() => {
       'worklet';
       cancelAnimation(delta);

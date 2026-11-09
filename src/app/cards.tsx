@@ -1,7 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Text, View, useWindowDimensions } from 'react-native';
+import { ScrollView, Text, View, useWindowDimensions } from 'react-native';
 import { StyleSheet } from 'react-native-unistyles';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -30,25 +30,32 @@ export default function CardsScreen() {
     // The scene is deliberately dark in both themes: screen-blended highlights
     // vanish on white. Same precedent as AsteroidGame (spec section 6).
     <View style={styles.screen}>
-      <SafeAreaView style={styles.content}>
-        <Text style={styles.title}>{t('cards.title')}</Text>
-        <HoloCard
-          width={cardWidth}
-          pattern={pattern}
-          rainbow={rainbow}
-          glare={glare}
-          glitter={glitter}
-        />
-        <FoilPicker
-          pattern={pattern}
-          onPatternChange={setPattern}
-          rainbow={rainbow}
-          onRainbowChange={setRainbow}
-          glare={glare}
-          onGlareChange={setGlare}
-          glitter={glitter}
-          onGlitterChange={setGlitter}
-        />
+      <SafeAreaView style={styles.safeArea} edges={['top', 'bottom']}>
+        <ScrollView
+          contentContainerStyle={styles.content}
+          showsVerticalScrollIndicator={false}
+          // Keep the card's drag gesture from fighting the scroll: the card
+          // claims horizontal drags, vertical drags scroll (see useCardTilt).
+          bounces>
+          <Text style={styles.title}>{t('cards.title')}</Text>
+          <HoloCard
+            width={cardWidth}
+            pattern={pattern}
+            rainbow={rainbow}
+            glare={glare}
+            glitter={glitter}
+          />
+          <FoilPicker
+            pattern={pattern}
+            onPatternChange={setPattern}
+            rainbow={rainbow}
+            onRainbowChange={setRainbow}
+            glare={glare}
+            onGlareChange={setGlare}
+            glitter={glitter}
+            onGlitterChange={setGlitter}
+          />
+        </ScrollView>
       </SafeAreaView>
       <StatusBar style="light" />
     </View>
@@ -60,12 +67,16 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: Colors.dark.background,
   },
-  content: {
+  safeArea: {
     flex: 1,
+  },
+  content: {
+    flexGrow: 1,
     alignItems: 'center',
     justifyContent: 'center',
     gap: Spacing.four,
     paddingHorizontal: Spacing.four,
+    paddingVertical: Spacing.four,
   },
   title: {
     fontSize: 22,
